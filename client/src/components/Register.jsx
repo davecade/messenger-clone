@@ -17,6 +17,20 @@ const Register = () => {
         }));
     };
 
+    const fileHandler = (e) => {
+        if (e.target.files.length !== 0) {
+            setState((prev) => ({
+                ...prev,
+                [e.target.name]: e.target.files[0],
+            }));
+        }
+    };
+
+    const register = (e) => {
+        e.preventDefault();
+        console.log("state: ", state);
+    };
+
     return (
         <div className="register">
             <div className="card">
@@ -24,7 +38,7 @@ const Register = () => {
                     <h3>Register</h3>
                 </div>
                 <div className="card-body">
-                    <form action="">
+                    <form onSubmit={register}>
                         <div className="form-group">
                             <label htmlFor="username">User Name</label>
                             <input
@@ -87,6 +101,7 @@ const Register = () => {
                                         className="form-control"
                                         id="image"
                                         name={"image"}
+                                        onChange={fileHandler}
                                     />
                                 </div>
                             </div>
