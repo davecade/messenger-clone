@@ -4,152 +4,152 @@ import { useDispatch } from "react-redux";
 import { userRegister } from "../store/actions/authActions";
 
 const Register = () => {
-    const [state, setState] = useState({
-        userName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        image: "",
-    });
-    const [loadImage, setLoadImage] = useState("");
-    const dispatch = useDispatch();
+	const [state, setState] = useState({
+		userName: "",
+		email: "",
+		password: "",
+		confirmPassword: "",
+		image: "",
+	});
+	const [loadImage, setLoadImage] = useState("");
+	const dispatch = useDispatch();
 
-    const inputHandle = (e) => {
-        setState((prev) => ({
-            ...prev,
-            [e.target.name]: e.target.value,
-        }));
-    };
+	const inputHandle = (e) => {
+		setState((prev) => ({
+			...prev,
+			[e.target.name]: e.target.value,
+		}));
+	};
 
-    const fileHandler = (e) => {
-        if (e.target.files.length !== 0) {
-            setState((prev) => ({
-                ...prev,
-                [e.target.name]: e.target.files[0],
-            }));
-        }
+	const fileHandler = (e) => {
+		if (e.target.files.length !== 0) {
+			setState((prev) => ({
+				...prev,
+				[e.target.name]: e.target.files[0],
+			}));
+		}
 
-        const reader = new FileReader();
-        reader.onload = () => {
-            setLoadImage(reader.result);
-        };
-        reader.readAsDataURL(e.target.files[0]);
-    };
+		const reader = new FileReader();
+		reader.onload = () => {
+			setLoadImage(reader.result);
+		};
+		reader.readAsDataURL(e.target.files[0]);
+	};
 
-    const register = (e) => {
-        const { userName, email, password, confirmPassword, image } = state;
-        e.preventDefault();
+	const register = (e) => {
+		const { userName, email, password, confirmPassword, image } = state;
+		e.preventDefault();
 
-        const formData = new FormData();
+		const formData = new FormData();
+		formData.append("userName", userName);
+		formData.append("email", email);
+		formData.append("password", password);
+		formData.append("confirmPassword", confirmPassword);
+		formData.append("image", image);
+		console.log("formData > _", formData);
+		dispatch(userRegister(formData));
 
-        formData.append("userName", userName);
-        formData.append("email", email);
-        formData.append("password", password);
-        formData.append("confirmPassword", confirmPassword);
-        formData.append("image", image);
-        dispatch(userRegister(formData));
+		console.log("state: ", state);
+	};
 
-        console.log("state: ", state);
-    };
+	return (
+		<div className="register">
+			<div className="card">
+				<div className="card-header">
+					<h3>Register</h3>
+				</div>
+				<div className="card-body">
+					<form onSubmit={register}>
+						<div className="form-group">
+							<label htmlFor="username">User Name</label>
+							<input
+								type="text"
+								className="form-control"
+								placeholder="User Name"
+								id="username"
+								onChange={inputHandle}
+								name={"userName"}
+								value={state.userName}
+							/>
+						</div>
 
-    return (
-        <div className="register">
-            <div className="card">
-                <div className="card-header">
-                    <h3>Register</h3>
-                </div>
-                <div className="card-body">
-                    <form onSubmit={register}>
-                        <div className="form-group">
-                            <label htmlFor="username">User Name</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                placeholder="User Name"
-                                id="username"
-                                onChange={inputHandle}
-                                name={"userName"}
-                                value={state.userName}
-                            />
-                        </div>
+						<div className="form-group">
+							<label htmlFor="email">Email</label>
+							<input
+								type="email"
+								className="form-control"
+								placeholder="Email"
+								id="email"
+								onChange={inputHandle}
+								name={"email"}
+								value={state.email}
+							/>
+						</div>
 
-                        <div className="form-group">
-                            <label htmlFor="email">Email</label>
-                            <input
-                                type="email"
-                                className="form-control"
-                                placeholder="Email"
-                                id="email"
-                                onChange={inputHandle}
-                                name={"email"}
-                                value={state.email}
-                            />
-                        </div>
+						<div className="form-group">
+							<label htmlFor="password">Password</label>
+							<input
+								type="password"
+								className="form-control"
+								placeholder="Password"
+								id="password"
+								onChange={inputHandle}
+								name={"password"}
+								value={state.password}
+							/>
+						</div>
+						<div className="form-group">
+							<label htmlFor="confirmPassword">
+								Confirm Password
+							</label>
+							<input
+								type="password"
+								className="form-control"
+								placeholder="Confirm Password"
+								id="confirmPassword"
+								onChange={inputHandle}
+								name={"confirmPassword"}
+								value={state.confirmPassword}
+							/>
+						</div>
+						<div className="form-group">
+							<div className="file-image">
+								<div className="image">
+									{loadImage ? <img src={loadImage} /> : ""}
+								</div>
+								<div className="file">
+									<label htmlFor="image">Select Image</label>
+									<input
+										type="file"
+										className="form-control"
+										id="image"
+										name={"image"}
+										onChange={fileHandler}
+									/>
+								</div>
+							</div>
+						</div>
 
-                        <div className="form-group">
-                            <label htmlFor="password">Password</label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                placeholder="Password"
-                                id="password"
-                                onChange={inputHandle}
-                                name={"password"}
-                                value={state.password}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="confirmPassword">
-                                Confirm Password
-                            </label>
-                            <input
-                                type="password"
-                                className="form-control"
-                                placeholder="Confirm Password"
-                                id="confirmPassword"
-                                onChange={inputHandle}
-                                name={"confirmPassword"}
-                                value={state.confirmPassword}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <div className="file-image">
-                                <div className="image">
-                                    {loadImage ? <img src={loadImage} /> : ""}
-                                </div>
-                                <div className="file">
-                                    <label htmlFor="image">Select Image</label>
-                                    <input
-                                        type="file"
-                                        className="form-control"
-                                        id="image"
-                                        name={"image"}
-                                        onChange={fileHandler}
-                                    />
-                                </div>
-                            </div>
-                        </div>
+						<div className="form-group">
+							<input
+								type="submit"
+								value="register"
+								className="btn"
+							/>
+						</div>
 
-                        <div className="form-group">
-                            <input
-                                type="submit"
-                                value="register"
-                                className="btn"
-                            />
-                        </div>
-
-                        <div className="form-group">
-                            <span>
-                                <Link to="/messenger/login">
-                                    Login Your Account
-                                </Link>
-                            </span>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    );
+						<div className="form-group">
+							<span>
+								<Link to="/messenger/login">
+									Login Your Account
+								</Link>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	);
 };
 
 export default Register;
