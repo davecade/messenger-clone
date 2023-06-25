@@ -10,7 +10,7 @@ export const userRegister = (data) => {
 
         try {
             const response = await axios.post(
-                "/messenger/user-register",
+                "/api/messenger/user-register",
                 data,
                 config
             );
