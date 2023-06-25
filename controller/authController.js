@@ -50,10 +50,10 @@ module.exports.userRegister = (req, res) => {
 			const randNumber = Math.floor(Math.random() * 99999);
 			const newImageName = `${randNumber}${getImageName}`;
 			files.image.originalFilename = newImageName;
+
 			const newPath =
 				__dirname +
 				`/../client/public/image/${files.image.originalFilename}`;
-			console.log("newPath > ", newPath);
 
 			try {
 				const checkUser = await registerModel.findOne({
@@ -66,6 +66,7 @@ module.exports.userRegister = (req, res) => {
 						},
 					});
 				} else {
+					// Copies your image into image folder
 					fs.copyFile(
 						files.image.filepath,
 						newPath,
@@ -79,6 +80,7 @@ module.exports.userRegister = (req, res) => {
 									image: files.image.originalFilename,
 								});
 
+								// Here it creates the JWT
 								const token = jwt.sign(
 									{
 										id: userCreate._id,
@@ -103,6 +105,11 @@ module.exports.userRegister = (req, res) => {
 												1000
 									),
 								};
+
+								// Adds JWT to response
+								// Also sends it back as a cookie
+								// So in the browser, it will auto save as cookie
+								// so that frontend has access to it
 								res.status(201)
 									.cookie("authToken", token, options)
 									.json({
