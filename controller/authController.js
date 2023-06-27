@@ -85,7 +85,7 @@ module.exports.userRegister = (req, res) => {
 									{
 										id: userCreate._id,
 										email: userCreate.email,
-										iserName: userCreate.userName,
+										userName: userCreate.userName,
 										image: userCreate.image,
 										registerTime: userCreate.createdAt,
 									},
