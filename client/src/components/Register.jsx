@@ -1,9 +1,16 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { userRegister } from "../store/actions/authActions";
+import { Link, useNavigate } from "react-router-dom";
+import { useAlert } from "react-alert";
+import { ERROR_CLEAR, SUCCESS_MESSAGE_CLEAR } from "../store/types/authType";
 
 const Register = () => {
+	const alert = useAlert();
+	const navigate = useNavigate();
+	const { loading, authenticated, error, successMessage, myInfo } =
+		useSelector((state) => state.auth);
+
 	const [state, setState] = useState({
 		userName: "",
 		email: "",
@@ -11,6 +18,7 @@ const Register = () => {
 		confirmPassword: "",
 		image: "",
 	});
+
 	const [loadImage, setLoadImage] = useState("");
 	const dispatch = useDispatch();
 
@@ -46,11 +54,22 @@ const Register = () => {
 		formData.append("password", password);
 		formData.append("confirmPassword", confirmPassword);
 		formData.append("image", image);
-		console.log("formData > _", formData);
 		dispatch(userRegister(formData));
-
-		console.log("state: ", state);
 	};
+
+	useEffect(() => {
+		if (authenticated) {
+			navigate("/");
+		}
+		if (successMessage) {
+			alert.success(successMessage);
+			dispatch({ type: SUCCESS_MESSAGE_CLEAR });
+		}
+		if (error) {
+			error.map((err) => alert.error(err));
+			dispatch({ type: ERROR_CLEAR });
+		}
+	}, [successMessage, error]);
 
 	return (
 		<div className="register">

@@ -71,7 +71,6 @@ module.exports.userRegister = (req, res) => {
 						files.image.filepath,
 						newPath,
 						async (error) => {
-							console.log("error > ", error);
 							if (!error) {
 								const userCreate = await registerModel.create({
 									userName,
@@ -113,7 +112,7 @@ module.exports.userRegister = (req, res) => {
 								res.status(201)
 									.cookie("authToken", token, options)
 									.json({
-										succssMessage:
+										successMessage:
 											"Your Registration was successful",
 										token,
 									});
