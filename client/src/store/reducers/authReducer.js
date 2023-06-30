@@ -42,10 +42,9 @@ if (getToken) {
 
 export const authReducer = (state = authState, action) => {
 	const { type, payload } = action;
-	console.log("type >> ", type);
-	console.log("payload >> ", payload);
+
 	switch (type) {
-		case REGISTER_FAIL || LOGIN_FAIL:
+		case REGISTER_FAIL:
 			return {
 				...state,
 				error: payload.errorMessage,
@@ -55,7 +54,27 @@ export const authReducer = (state = authState, action) => {
 				loading: true,
 			};
 
-		case REGISTER_SUCCESS || LOGIN_SUCCESS:
+		case LOGIN_FAIL:
+			return {
+				...state,
+				error: payload.errorMessage,
+				successMessage: "",
+				authenticated: false,
+				myInfo: "",
+				loading: true,
+			};
+
+		case REGISTER_SUCCESS:
+			return {
+				...state,
+				myInfo: tokenDecoded(payload.token),
+				successMessage: payload.successMessage,
+				error: "",
+				authenticated: true,
+				loading: false,
+			};
+
+		case LOGIN_SUCCESS:
 			return {
 				...state,
 				myInfo: tokenDecoded(payload.token),

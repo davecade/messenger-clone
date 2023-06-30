@@ -30,6 +30,7 @@ const Login = () => {
 		dispatch(userLogin(state));
 	};
 
+	// Need to figure out WHY its not re-rendering and navigating to the home page
 	useEffect(() => {
 		if (authenticated) {
 			navigate("/");
@@ -42,8 +43,9 @@ const Login = () => {
 			error.map((err) => alert.error(err));
 			dispatch({ type: ERROR_CLEAR });
 		}
-	}, [successMessage, error, authenticated]);
+	}, [successMessage, error]);
 	console.log("authenticated", authenticated);
+	console.log("successMessage >", successMessage);
 	return (
 		<div className="register">
 			<div className="card">
