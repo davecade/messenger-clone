@@ -43,62 +43,36 @@ if (getToken) {
 export const authReducer = (state = authState, action) => {
 	const { type, payload } = action;
 
+	const getNewState = (state, newState) => ({ ...state, ...newState });
+
 	switch (type) {
 		case REGISTER_FAIL:
-			return {
-				...state,
-				error: payload.errorMessage,
-				successMessage: "",
-				authenticated: false,
-				myInfo: "",
-				loading: true,
-			};
-
 		case LOGIN_FAIL:
-			return {
-				...state,
+			return getNewState(state, {
 				error: payload.errorMessage,
 				successMessage: "",
 				authenticated: false,
 				myInfo: "",
 				loading: true,
-			};
+			});
 
 		case REGISTER_SUCCESS:
-			return {
-				...state,
-				myInfo: tokenDecoded(payload.token),
-				successMessage: payload.successMessage,
-				error: "",
-				authenticated: true,
-				loading: false,
-			};
-
 		case LOGIN_SUCCESS:
-			return {
-				...state,
+			return getNewState(state, {
 				myInfo: tokenDecoded(payload.token),
 				successMessage: payload.successMessage,
 				error: "",
 				authenticated: true,
 				loading: false,
-			};
+			});
 
 		case SUCCESS_MESSAGE_CLEAR:
-			return {
-				...state,
-				successMessage: "",
-			};
+			return getNewState(state, { successMessage: "" });
 
 		case ERROR_CLEAR:
-			return {
-				...state,
-				error: "",
-			};
+			return getNewState(state, { error: "" });
 
 		default:
-			break;
+			return state;
 	}
-
-	return state;
 };
