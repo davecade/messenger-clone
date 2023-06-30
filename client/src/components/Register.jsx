@@ -8,8 +8,9 @@ import { ERROR_CLEAR, SUCCESS_MESSAGE_CLEAR } from "../store/types/authType";
 const Register = () => {
 	const alert = useAlert();
 	const navigate = useNavigate();
-	const { loading, authenticated, error, successMessage, myInfo } =
-		useSelector((state) => state.auth);
+	const { loading, authenticated, error, successMessage, myInfo } = useSelector(
+		(state) => state.auth
+	);
 
 	const [state, setState] = useState({
 		userName: "",
@@ -56,7 +57,7 @@ const Register = () => {
 		formData.append("image", image);
 		dispatch(userRegister(formData));
 	};
-
+	
 	useEffect(() => {
 		if (authenticated) {
 			navigate("/");
@@ -118,9 +119,7 @@ const Register = () => {
 							/>
 						</div>
 						<div className="form-group">
-							<label htmlFor="confirmPassword">
-								Confirm Password
-							</label>
+							<label htmlFor="confirmPassword">Confirm Password</label>
 							<input
 								type="password"
 								className="form-control"
@@ -150,18 +149,12 @@ const Register = () => {
 						</div>
 
 						<div className="form-group">
-							<input
-								type="submit"
-								value="register"
-								className="btn"
-							/>
+							<input type="submit" value="register" className="btn" />
 						</div>
 
 						<div className="form-group">
 							<span>
-								<Link to="/messenger/login">
-									Login Your Account
-								</Link>
+								<Link to="/messenger/login">Login Your Account</Link>
 							</span>
 						</div>
 					</form>

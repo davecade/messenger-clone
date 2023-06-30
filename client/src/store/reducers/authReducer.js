@@ -1,4 +1,11 @@
-import { ERROR_CLEAR, REGISTER_FAIL, REGISTER_SUCCESS, SUCCESS_MESSAGE_CLEAR } from "../types/authType";
+import {
+	ERROR_CLEAR,
+	REGISTER_FAIL,
+	REGISTER_SUCCESS,
+	SUCCESS_MESSAGE_CLEAR,
+	LOGIN_FAIL,
+	LOGIN_SUCCESS,
+} from "../types/authType";
 import jwt_decode from "jwt-decode";
 
 const authState = {
@@ -35,8 +42,10 @@ if (getToken) {
 
 export const authReducer = (state = authState, action) => {
 	const { type, payload } = action;
+	console.log("type >> ", type);
+	console.log("payload >> ", payload);
 	switch (type) {
-		case REGISTER_FAIL:
+		case REGISTER_FAIL || LOGIN_FAIL:
 			return {
 				...state,
 				error: payload.errorMessage,
@@ -46,12 +55,10 @@ export const authReducer = (state = authState, action) => {
 				loading: true,
 			};
 
-		case REGISTER_SUCCESS:
-			const myInfo = tokenDecoded(payload.token);
-
+		case REGISTER_SUCCESS || LOGIN_SUCCESS:
 			return {
 				...state,
-				myInfo: myInfo,
+				myInfo: tokenDecoded(payload.token),
 				successMessage: payload.successMessage,
 				error: "",
 				authenticated: true,
@@ -62,13 +69,13 @@ export const authReducer = (state = authState, action) => {
 			return {
 				...state,
 				successMessage: "",
-			}
+			};
 
 		case ERROR_CLEAR:
 			return {
 				...state,
 				error: "",
-			}
+			};
 
 		default:
 			break;

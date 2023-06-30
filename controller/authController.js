@@ -136,3 +136,91 @@ module.exports.userRegister = (req, res) => {
 		}
 	}); // end Formidable
 };
+
+module.exports.userLogin = async (req, res) => {
+	const error = [];
+	const { email, password } = req.body;
+
+	if (!email) {
+		error.push("Please provide a Email");
+	}
+	if (!password) {
+		error.push("Please provide a password");
+	}
+	if (email && !validator.isEmail(email)) {
+		error.push("Please provide a Valid Email");
+	}
+
+	if (error.length > 0) {
+		res.status(400).json({
+			error: {
+				errorMessage: error,
+			},
+		});
+	} else {
+		try {
+			const checkUser = await registerModel
+				.findOne({
+					email: email,
+				})
+				.select("+password");
+
+			if (!checkUser) {
+				res.status(404).json({
+					error: {
+						errorMessage: ["Your email does not exists"],
+					},
+				});
+			}
+
+			const checkPassword = await bcrypt.compare(
+				password,
+				checkUser.password
+			);
+
+			if (!checkPassword) {
+				res.status(404).json({
+					error: {
+						errorMessage: ["Your password does not match"],
+					},
+				});
+			}
+
+			// Here it creates the JWT
+			const token = jwt.sign(
+				{
+					id: checkUser._id,
+					email: checkUser.email,
+					userName: checkUser.userName,
+					image: checkUser.image,
+					registerTime: checkUser.createdAt,
+				},
+				process.env.SECRET,
+				{
+					expiresIn: process.env.TOKEN_EXP,
+				}
+			);
+
+			const options = {
+				expires: new Date(
+					Date.now() + process.env.COOKIE_EXP * 24 * 60 * 60 * 1000
+				),
+			};
+
+			// Adds JWT to response
+			// Also sends it back as a cookie
+			// So in the browser, it will auto save as cookie
+			// so that frontend has access to it
+			res.status(201).cookie("authToken", token, options).json({
+				successMessage: "Login Successful",
+				token,
+			});
+		} catch (error) {
+			res.status(500).json({
+				error: {
+					errorMessage: ["Internal Server Error"],
+				},
+			});
+		}
+	}
+};
