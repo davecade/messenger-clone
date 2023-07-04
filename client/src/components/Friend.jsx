@@ -1,6 +1,6 @@
 import React from "react";
 
-const Friends = () => {
+const Friend = () => {
 	return (
 		<div className="friend">
 			<div className="friend-image">
@@ -21,4 +21,4 @@ const Friends = () => {
 	);
 };
 
-export default Friends;
+export default Friend;
