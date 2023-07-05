@@ -1,5 +1,6 @@
 import React from "react";
 import { FaPhoneAlt, FaVideo, FaRocketchat } from "react-icons/fa";
+import Message from "./Message";
 
 const RightSide = () => {
 	return (
@@ -17,7 +18,7 @@ const RightSide = () => {
 										/>
 									</div>
 									<div className="name">
-										<h3> Kazi Ariyan </h3>
+										<h3> Dave Cadelina </h3>
 									</div>
 								</div>
 
@@ -35,6 +36,7 @@ const RightSide = () => {
 									</div>
 								</div>
 							</div>
+							<Message />
 						</div>
 					</div>
 
