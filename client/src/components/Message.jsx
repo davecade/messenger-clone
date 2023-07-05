@@ -126,6 +126,20 @@ const Message = () => {
 				<div className="time">2 Jan 2022</div>
 			</div>
 
+			<div className="my-message">
+				<div className="image-message">
+					<div className="my-text">
+						<p className="message-text">
+							<img
+								src="/image/28885Dave_._3D_light_background_cool_profile_picture.png"
+								alt=""
+							/>
+						</p>
+					</div>
+				</div>
+				<div className="time">2 Jan 2022</div>
+			</div>
+
 			<div className="fd-message">
 				<div className="image-message-time">
 					<img
