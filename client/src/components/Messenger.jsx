@@ -2,6 +2,7 @@ import React from "react";
 import { FaEllipsisH, FaEdit, FaSistrix } from "react-icons/fa";
 import ActiveFriends from "./ActiveFriends";
 import Friend from "./Friend";
+import RightSide from "./RightSide";
 
 const Messenger = () => {
 	return (
@@ -13,7 +14,7 @@ const Messenger = () => {
 							<div className="image-name">
 								<div className="image">
 									<img
-										src="/image/28885Dave_._3D_light_background_cool_profile_picture_detailed_07085e90-d908-4ec8-8d95-fdf97ae1ed12.png"
+										src="/image/28885Dave_._3D_light_background_cool_profile_picture.png"
 										alt=""
 									/>
 								</div>
@@ -53,24 +54,25 @@ const Messenger = () => {
 							<div className="hover-friend">
 								<Friend />
 							</div>
-                            <div className="hover-friend">
+							<div className="hover-friend">
 								<Friend />
 							</div>
-                            <div className="hover-friend">
+							<div className="hover-friend">
 								<Friend />
 							</div>
-                            <div className="hover-friend">
+							<div className="hover-friend">
 								<Friend />
 							</div>
-                            <div className="hover-friend">
+							<div className="hover-friend">
 								<Friend />
 							</div>
-                            <div className="hover-friend">
+							<div className="hover-friend">
 								<Friend />
 							</div>
 						</div>
 					</div>
 				</div>
+				<RightSide />
 			</div>
 		</div>
 	);
