@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaEllipsisH, FaEdit, FaSistrix } from "react-icons/fa";
 import ActiveFriends from "./ActiveFriends";
 import Friend from "./Friend";
 import RightSide from "./RightSide";
+import { useDispatch } from "react-redux";
+import { getFriends } from "../store/actions/messengerAction";
 
 const Messenger = () => {
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		dispatch(getFriends());
+	}, []);
+
 	return (
 		<div className="messenger">
 			<div className="row">
