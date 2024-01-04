@@ -2,7 +2,7 @@ import React from "react";
 
 const Friend = ({ friendData }) => {
 	const { userName, image } = friendData;
-	console.log("image is: ", image);
+
 	return (
 		<div className="friend">
 			<div className="friend-image">

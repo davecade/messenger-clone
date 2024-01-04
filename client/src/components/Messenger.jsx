@@ -10,6 +10,7 @@ const Messenger = () => {
 	const dispatch = useDispatch();
 
 	const { friends } = useSelector((state) => state.messenger);
+	const { myInfo } = useSelector((state) => state.auth);
 
 	useEffect(() => {
 		dispatch(getFriends());
@@ -23,13 +24,10 @@ const Messenger = () => {
 						<div className="top">
 							<div className="image-name">
 								<div className="image">
-									<img
-										src="/image/28885Dave_._3D_light_background_cool_profile_picture_detailed_07085e90-d908-4ec8-8d95-fdf97ae1ed12.png"
-										alt=""
-									/>
+									<img src={`/image/${myInfo.image}`} alt="" />
 								</div>
 								<div className="name">
-									<h3> HI Dave </h3>
+									<h3>{myInfo.userName}</h3>
 								</div>
 							</div>
 
@@ -61,14 +59,15 @@ const Messenger = () => {
 							<ActiveFriends />
 						</div>
 						<div className="friends">
-							{friends.length > 0 &&
-								friends.map((friend) => {
-									return (
-										<div className="hover-friend">
-											<Friend friendData={friend} />
-										</div>
-									);
-								})}
+							{friends.length > 0
+								? friends.map((friend) => {
+										return (
+											<div className="hover-friend">
+												<Friend friendData={friend} />
+											</div>
+										);
+								  })
+								: "No Friend"}
 						</div>
 					</div>
 				</div>
