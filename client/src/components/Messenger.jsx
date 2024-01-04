@@ -3,11 +3,13 @@ import { FaEllipsisH, FaEdit, FaSistrix } from "react-icons/fa";
 import ActiveFriends from "./ActiveFriends";
 import Friend from "./Friend";
 import RightSide from "./RightSide";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getFriends } from "../store/actions/messengerAction";
 
 const Messenger = () => {
 	const dispatch = useDispatch();
+
+	const { friends } = useSelector((state) => state.messenger);
 
 	useEffect(() => {
 		dispatch(getFriends());
@@ -22,7 +24,7 @@ const Messenger = () => {
 							<div className="image-name">
 								<div className="image">
 									<img
-										src="/image/28885Dave_._3D_light_background_cool_profile_picture.png"
+										src="/image/28885Dave_._3D_light_background_cool_profile_picture_detailed_07085e90-d908-4ec8-8d95-fdf97ae1ed12.png"
 										alt=""
 									/>
 								</div>
@@ -59,7 +61,15 @@ const Messenger = () => {
 							<ActiveFriends />
 						</div>
 						<div className="friends">
-							<div className="hover-friend">
+							{friends.length > 0 &&
+								friends.map((friend) => {
+									return (
+										<div className="hover-friend">
+											<Friend friendData={friend} />
+										</div>
+									);
+								})}
+							{/* <div className="hover-friend">
 								<Friend />
 							</div>
 							<div className="hover-friend">
@@ -76,7 +86,7 @@ const Messenger = () => {
 							</div>
 							<div className="hover-friend">
 								<Friend />
-							</div>
+							</div> */}
 						</div>
 					</div>
 				</div>

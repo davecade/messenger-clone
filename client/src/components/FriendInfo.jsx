@@ -8,7 +8,7 @@ const FriendInfo = () => {
 			<div className="image-name">
 				<div className="image">
 					<img
-						src="/image/28885Dave_._3D_light_background_cool_profile_picture.png"
+						src="/image/28885Dave_._3D_light_background_cool_profile_picture_detailed_07085e90-d908-4ec8-8d95-fdf97ae1ed12.png"
 						alt=""
 					/>
 				</div>
@@ -41,19 +41,19 @@ const FriendInfo = () => {
 
 			<div className="gallery">
 				<img
-					src="/image/28885Dave_._3D_light_background_cool_profile_picture.png"
+					src="/image/28885Dave_._3D_light_background_cool_profile_picture_detailed_07085e90-d908-4ec8-8d95-fdf97ae1ed12.png"
 					alt=""
 				/>
 				<img
-					src="/image/28885Dave_._3D_light_background_cool_profile_picture.png"
+					src="/image/28885Dave_._3D_light_background_cool_profile_picture_detailed_07085e90-d908-4ec8-8d95-fdf97ae1ed12.png"
 					alt=""
 				/>
 				<img
-					src="/image/28885Dave_._3D_light_background_cool_profile_picture.png"
+					src="/image/28885Dave_._3D_light_background_cool_profile_picture_detailed_07085e90-d908-4ec8-8d95-fdf97ae1ed12.png"
 					alt=""
 				/>
 				<img
-					src="/image/28885Dave_._3D_light_background_cool_profile_picture.png"
+					src="/image/28885Dave_._3D_light_background_cool_profile_picture_detailed_07085e90-d908-4ec8-8d95-fdf97ae1ed12.png"
 					alt=""
 				/>
 			</div>
