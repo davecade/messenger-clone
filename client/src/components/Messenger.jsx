@@ -69,24 +69,6 @@ const Messenger = () => {
 										</div>
 									);
 								})}
-							{/* <div className="hover-friend">
-								<Friend />
-							</div>
-							<div className="hover-friend">
-								<Friend />
-							</div>
-							<div className="hover-friend">
-								<Friend />
-							</div>
-							<div className="hover-friend">
-								<Friend />
-							</div>
-							<div className="hover-friend">
-								<Friend />
-							</div>
-							<div className="hover-friend">
-								<Friend />
-							</div> */}
 						</div>
 					</div>
 				</div>
